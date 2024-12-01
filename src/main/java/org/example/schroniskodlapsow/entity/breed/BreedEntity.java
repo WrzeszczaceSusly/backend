@@ -1,4 +1,4 @@
-package org.example.schroniskodlapsow.entity;
+package org.example.schroniskodlapsow.entity.breed;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

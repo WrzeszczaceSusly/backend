@@ -1,6 +1,7 @@
-package org.example.schroniskodlapsow;
+package org.example.schroniskodlapsow.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.schroniskodlapsow.service.DogService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import org.example.schroniskodlapsow.entity.BreedEntity;
+import org.example.schroniskodlapsow.entity.breed.BreedEntity;
 
 
 @RestController

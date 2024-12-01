@@ -1,8 +1,8 @@
-package org.example.schroniskodlapsow;
+package org.example.schroniskodlapsow.service;
 
-import org.example.schroniskodlapsow.entity.*;
-import org.example.schroniskodlapsow.repository.*;
+import org.example.schroniskodlapsow.entity.breed.BreedEntity;
 import lombok.RequiredArgsConstructor;
+import org.example.schroniskodlapsow.repository.breed.BreedRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

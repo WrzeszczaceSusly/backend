@@ -1,6 +1,6 @@
-package org.example.schroniskodlapsow.repository;
+package org.example.schroniskodlapsow.repository.breed;
 
-import org.example.schroniskodlapsow.entity.BreedEntity;
+import org.example.schroniskodlapsow.entity.breed.BreedEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

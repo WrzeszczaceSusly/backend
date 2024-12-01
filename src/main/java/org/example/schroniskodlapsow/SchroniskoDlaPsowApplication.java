@@ -1,11 +1,14 @@
 package org.example.schroniskodlapsow;
 
-import org.example.schroniskodlapsow.entity.BreedEntity;
-import org.example.schroniskodlapsow.repository.BreedRepository;
+import org.example.schroniskodlapsow.entity.breed.BreedEntity;
+import org.example.schroniskodlapsow.entity.user.MyUser;
+import org.example.schroniskodlapsow.repository.breed.BreedRepository;
+import org.example.schroniskodlapsow.repository.user.MyUserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @SpringBootApplication
@@ -17,9 +20,17 @@ public class SchroniskoDlaPsowApplication {
 
      @Bean
     public CommandLineRunner commandLineRunner(
-            BreedRepository repository
+            MyUserRepository myUserRepository,
+            BreedRepository repository,
+            PasswordEncoder passwordEncoder
     ) {
         return args -> {
+
+            //user
+            String password = passwordEncoder.encode("1234");
+            MyUser myUser = MyUser.builder().firstName("Jan").lastName("Kowalski").email("test@gmail.com").password(password).build();
+            myUserRepository.save(myUser);
+
             //breeds
             BreedEntity labradorRetriever = BreedEntity.builder().name("Labrador Retriever").build();
             repository.save(labradorRetriever);
