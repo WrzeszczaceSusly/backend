@@ -1,18 +1,29 @@
 package org.example.schroniskodlapsow;
 
+import org.example.schroniskodlapsow.entity.*;
+import org.example.schroniskodlapsow.repository.*;
 import lombok.RequiredArgsConstructor;
-import org.example.schroniskodlapsow.entity.BreedEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class DogService {
+    private final BreedRepository repository;
 
+    public Page<BreedEntity> getAllBreeds(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
     public List<BreedEntity> getAllBreeds() {
-        return List.of(BreedEntity.builder().id(1).name("Labrador").build(),
-                BreedEntity.builder().id(2).name("Jamnik").build());
+        return repository.findAll();
+    }
+    public Optional<BreedEntity> getBreedDetails(int breedId) {
+        return repository.findById(breedId);
     }
 
 }
+
