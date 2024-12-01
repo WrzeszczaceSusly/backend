@@ -1,7 +1,7 @@
 package org.example.schroniskodlapsow;
 
-import com.example.schroniskodlapsow.entity.*;
-import com.example.schroniskodlapsow.repository.*;
+import org.example.schroniskodlapsow.entity.*;
+import org.example.schroniskodlapsow.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

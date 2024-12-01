@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import com.example.schroniskodlapsow.entity.BreedEntity;
+import org.example.schroniskodlapsow.entity.BreedEntity;
 
 
 @RestController
