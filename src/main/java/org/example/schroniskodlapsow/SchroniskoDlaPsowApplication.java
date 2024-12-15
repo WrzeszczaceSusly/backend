@@ -1,6 +1,7 @@
 package org.example.schroniskodlapsow;
 
 import org.example.schroniskodlapsow.entity.breed.BreedEntity;
+import org.example.schroniskodlapsow.entity.dog.DogEntity;
 import org.example.schroniskodlapsow.entity.user.MyUser;
 import org.example.schroniskodlapsow.repository.breed.BreedRepository;
 import org.example.schroniskodlapsow.repository.user.MyUserRepository;
@@ -9,6 +10,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.List;
 
 
 @SpringBootApplication
@@ -31,66 +34,70 @@ public class SchroniskoDlaPsowApplication {
             MyUser myUser = MyUser.builder().firstName("Jan").lastName("Kowalski").email("test@gmail.com").password(password).build();
             myUserRepository.save(myUser);
 
-            //breeds
-            BreedEntity labradorRetriever = BreedEntity.builder().name("Labrador Retriever").build();
-            repository.save(labradorRetriever);
+            // Lista nazw psów
+            List<String> dogNames1 = List.of("Burek", "Reksio");
+            List<String> dogNames2 = List.of("Azor", "Max");
+            List<String> dogNames3 = List.of("Ciapek", "Rocky");
+            List<String> dogNames4 = List.of("Bella", "Molly");
+            List<String> dogNames5 = List.of("Daisy", "Charlie");
+            List<String> dogNames6 = List.of("Luna", "Cooper");
+            List<String> dogNames7 = List.of("Buddy", "Bailey");
+            List<String> dogNames8 = List.of("Rosie", "Toby");
+            List<String> dogNames9 = List.of("Roxy", "Sammy");
+            List<String> dogNames10 = List.of("Zoe", "Simba");
+            List<String> dogNames11 = List.of("Duke", "Sadie");
+            List<String> dogNames12 = List.of("Milo", "Jack");
+            List<String> dogNames13 = List.of("Lilly", "Oscar");
+            List<String> dogNames14 = List.of("Bruno", "Ruby");
+            List<String> dogNames15 = List.of("Shadow", "Lucy");
+            List<String> dogNames16 = List.of("Piper", "Jake");
+            List<String> dogNames17 = List.of("Ace", "Oliver");
+            List<String> dogNames18 = List.of("Finn", "Ginger");
+            List<String> dogNames19 = List.of("Hunter", "Sophie");
+            List<String> dogNames20 = List.of("Nala", "Benji");
 
-            BreedEntity germanShepherd = BreedEntity.builder().name("German Shepherd").build();
-            repository.save(germanShepherd);
-
-            BreedEntity goldenRetriever = BreedEntity.builder().name("Golden Retriever").build();
-            repository.save(goldenRetriever);
-
-            BreedEntity bulldog = BreedEntity.builder().name("Bulldog").build();
-            repository.save(bulldog);
-
-            BreedEntity beagle = BreedEntity.builder().name("Beagle").build();
-            repository.save(beagle);
-
-            BreedEntity poodle = BreedEntity.builder().name("Poodle").build();
-            repository.save(poodle);
-
-            BreedEntity boxer = BreedEntity.builder().name("Boxer").build();
-            repository.save(boxer);
-
-            BreedEntity dachshund = BreedEntity.builder().name("Dachshund").build();
-            repository.save(dachshund);
-
-            BreedEntity siberianHusky = BreedEntity.builder().name("Siberian Husky").build();
-            repository.save(siberianHusky);
-
-            BreedEntity greatDane = BreedEntity.builder().name("Great Dane").build();
-            repository.save(greatDane);
-
-            BreedEntity shihTzu = BreedEntity.builder().name("Shih Tzu").build();
-            repository.save(shihTzu);
-
-            BreedEntity rottweiler = BreedEntity.builder().name("Rottweiler").build();
-            repository.save(rottweiler);
-
-            BreedEntity chihuahua = BreedEntity.builder().name("Chihuahua").build();
-            repository.save(chihuahua);
-
-            BreedEntity borderCollie = BreedEntity.builder().name("Border Collie").build();
-            repository.save(borderCollie);
-
-            BreedEntity maltese = BreedEntity.builder().name("Maltese").build();
-            repository.save(maltese);
-
-            BreedEntity yorkshireTerrier = BreedEntity.builder().name("Yorkshire Terrier").build();
-            repository.save(yorkshireTerrier);
-
-            BreedEntity pembrokeWelshCorgi = BreedEntity.builder().name("Pembroke Welsh Corgi").build();
-            repository.save(pembrokeWelshCorgi);
-
-            BreedEntity bostonTerrier = BreedEntity.builder().name("Boston Terrier").build();
-            repository.save(bostonTerrier);
-
-            BreedEntity shetlandSheepdog = BreedEntity.builder().name("Shetland Sheepdog").build();
-            repository.save(shetlandSheepdog);
-
-            BreedEntity dalmatian = BreedEntity.builder().name("Dalmatian").build();
-            repository.save(dalmatian);
+            // Tworzenie ras i psów
+            addBreedWithDogs(repository, "Labrador Retriever", dogNames1);
+            addBreedWithDogs(repository, "German Shepherd", dogNames2);
+            addBreedWithDogs(repository, "Golden Retriever", dogNames3);
+            addBreedWithDogs(repository, "Bulldog", dogNames4);
+            addBreedWithDogs(repository, "Beagle", dogNames5);
+            addBreedWithDogs(repository, "Poodle", dogNames6);
+            addBreedWithDogs(repository, "Boxer", dogNames7);
+            addBreedWithDogs(repository, "Dachshund", dogNames8);
+            addBreedWithDogs(repository, "Siberian Husky", dogNames9);
+            addBreedWithDogs(repository, "Great Dane", dogNames10);
+            addBreedWithDogs(repository, "Shih Tzu", dogNames11);
+            addBreedWithDogs(repository, "Rottweiler", dogNames12);
+            addBreedWithDogs(repository, "Chihuahua", dogNames13);
+            addBreedWithDogs(repository, "Border Collie", dogNames14);
+            addBreedWithDogs(repository, "Maltese", dogNames15);
+            addBreedWithDogs(repository, "Yorkshire Terrier", dogNames16);
+            addBreedWithDogs(repository, "Pembroke Welsh Corgi", dogNames17);
+            addBreedWithDogs(repository, "Boston Terrier", dogNames18);
+            addBreedWithDogs(repository, "Shetland Sheepdog", dogNames19);
+            addBreedWithDogs(repository, "Dalmatian", dogNames20);
         };
+     }
+
+    private void addBreedWithDogs(BreedRepository repository, String breedName, List<String> dogNames) {
+        // Tworzymy encję rasy
+        BreedEntity breedEntity = BreedEntity.builder()
+                .name(breedName)
+                .build();
+
+        // Dodajemy psy do rasy
+        List<DogEntity> dogs = dogNames.stream()
+                .map(name -> DogEntity.builder()
+                        .name(name)
+                        .breed(breedEntity)
+                        .build())
+                .toList();
+
+        breedEntity.setDogs(dogs);
+
+        // Zapisujemy rasę wraz z psami
+        repository.save(breedEntity);
     }
+
 }
