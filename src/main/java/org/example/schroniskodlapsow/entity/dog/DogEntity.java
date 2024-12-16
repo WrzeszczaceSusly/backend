@@ -1,5 +1,6 @@
 package org.example.schroniskodlapsow.entity.dog;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,9 @@ public class DogEntity {
     @GeneratedValue
     int Id;
     String name;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "breed_id")
+    @JsonBackReference
     BreedEntity breed;
 }
