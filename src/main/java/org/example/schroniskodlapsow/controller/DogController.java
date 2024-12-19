@@ -1,6 +1,8 @@
 package org.example.schroniskodlapsow.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.schroniskodlapsow.DogDto;
+import org.example.schroniskodlapsow.entity.dog.DogEntity;
 import org.example.schroniskodlapsow.service.DogService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -29,6 +31,14 @@ public class DogController {
         Pageable pageable = PageRequest.of(page, size);
         Page<BreedEntity> breedsPage = service.getAllBreeds(pageable);
         return ResponseEntity.ok(breedsPage.getContent());
+    }
+
+    @GetMapping("/dogs")
+    public ResponseEntity<List<DogDto>> getDogs(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "5") Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(service.getAllDogs(pageable));
     }
 
     @GetMapping("/breeds/{id}")
