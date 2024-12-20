@@ -19,8 +19,16 @@ public class DogEntity {
     int Id;
     String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "breed_id")
     @JsonBackReference
     BreedEntity breed;
+
+    @Lob
+    private byte[] image;
+
+    @Override
+    public String toString() {
+        return name + " " + breed.getName();
+    }
 }

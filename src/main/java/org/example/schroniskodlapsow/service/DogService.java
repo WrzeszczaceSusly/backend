@@ -1,9 +1,8 @@
 package org.example.schroniskodlapsow.service;
 
-import org.example.schroniskodlapsow.DogDto;
+import org.example.schroniskodlapsow.dto.DogDto;
 import org.example.schroniskodlapsow.entity.breed.BreedEntity;
 import lombok.RequiredArgsConstructor;
-import org.example.schroniskodlapsow.entity.dog.DogEntity;
 import org.example.schroniskodlapsow.repository.breed.BreedRepository;
 import org.example.schroniskodlapsow.repository.dog.DogRepository;
 import org.springframework.data.domain.Page;

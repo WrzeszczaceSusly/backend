@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface BreedRepository extends JpaRepository<BreedEntity, Integer> {
 
     Optional<BreedEntity> findDogEntityByName(String name);
+
+    BreedEntity findByName(String breedName);
 }
