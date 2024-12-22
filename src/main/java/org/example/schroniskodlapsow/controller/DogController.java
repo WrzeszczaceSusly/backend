@@ -1,8 +1,7 @@
 package org.example.schroniskodlapsow.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.schroniskodlapsow.DogDto;
-import org.example.schroniskodlapsow.entity.dog.DogEntity;
+import org.example.schroniskodlapsow.dto.DogDto;
 import org.example.schroniskodlapsow.service.DogService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
