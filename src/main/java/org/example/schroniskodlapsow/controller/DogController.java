@@ -2,6 +2,8 @@ package org.example.schroniskodlapsow.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.schroniskodlapsow.dto.DogDto;
+import org.example.schroniskodlapsow.entity.dog.DogEntity;
+import org.example.schroniskodlapsow.repository.dog.DogRepository;
 import org.example.schroniskodlapsow.service.DogService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,12 +18,12 @@ import java.util.Optional;
 import java.util.Random;
 import org.example.schroniskodlapsow.entity.breed.BreedEntity;
 
-
 @RestController
 @RequiredArgsConstructor
 public class DogController {
 
     private final DogService service;
+    private final DogRepository dogRepository;
 
     @GetMapping("/breeds")
     public ResponseEntity<List<BreedEntity>> getBreeds(
@@ -43,10 +45,18 @@ public class DogController {
     @GetMapping("/breeds/{id}")
     public ResponseEntity<BreedEntity> getBreedDetails(@PathVariable("id") int breedId) {
         Optional<BreedEntity> breedEntity = service.getBreedDetails(breedId);
-        if(breedEntity.isPresent())
+        if (breedEntity.isPresent()) {
             return ResponseEntity.ok(breedEntity.get());
-        else
+        } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Breed not found");
+        }
+    }
+
+    @GetMapping("/dogs/{id}")
+    public ResponseEntity<DogDto> getDogById(@PathVariable int id) {
+        Optional<DogEntity> dog = dogRepository.findById(id);
+        return dog.map(d -> ResponseEntity.ok(DogDto.from(d)))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dog not found"));
     }
 
     @GetMapping("/breeds/random")
@@ -60,6 +70,7 @@ public class DogController {
         int randomIndex = random.nextInt(breeds.size());
 
         Optional<BreedEntity> randomBreed = service.getBreedDetails(breeds.get(randomIndex).getId());
-        return randomBreed.map(breed -> ResponseEntity.ok(breed.getName())).orElseGet(() -> ResponseEntity.notFound().build());
+        return randomBreed.map(breed -> ResponseEntity.ok(breed.getName()))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
