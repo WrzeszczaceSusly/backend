@@ -16,16 +16,34 @@ import org.example.schroniskodlapsow.entity.breed.BreedEntity;
 public class DogEntity {
     @Id
     @GeneratedValue
-    int Id;
-    String name;
+    private int Id;
 
-    @ManyToOne()
+    private String name;
+
+    @ManyToOne
     @JoinColumn(name = "breed_id")
     @JsonBackReference
-    BreedEntity breed;
+    private BreedEntity breed;
 
     @Lob
     private byte[] image;
+
+    private int age;
+    private String sex;
+    private String size;
+    private double weight;
+
+    @Column(length = 1000) // np. większa długość kolumny, by pomieścić dłuższą historię
+    private String description;      // Krótki opis/historia psa
+
+    private String color;            // Np. "czarny", "brązowy"
+
+    private boolean vaccinated;      // Czy zaszczepiony
+    private boolean sterilized;      // Czy wysterylizowany
+    private boolean microchipped;    // Czy posiada mikrochip
+
+    private boolean friendlyWithKids;     // Przyjazny dzieciom?
+    private boolean friendlyWithAnimals;  // Przyjazny innym psom / kotom?
 
     @Override
     public String toString() {
