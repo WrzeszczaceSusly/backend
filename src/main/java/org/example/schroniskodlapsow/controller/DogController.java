@@ -2,6 +2,7 @@ package org.example.schroniskodlapsow.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.schroniskodlapsow.dto.DogDto;
+import org.example.schroniskodlapsow.entity.breed.BreedEntity;
 import org.example.schroniskodlapsow.entity.dog.DogEntity;
 import org.example.schroniskodlapsow.repository.dog.DogRepository;
 import org.example.schroniskodlapsow.service.DogService;
@@ -9,14 +10,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import org.example.schroniskodlapsow.entity.breed.BreedEntity;
 
 @RestController
 @RequiredArgsConstructor
@@ -72,5 +74,23 @@ public class DogController {
         Optional<BreedEntity> randomBreed = service.getBreedDetails(breeds.get(randomIndex).getId());
         return randomBreed.map(breed -> ResponseEntity.ok(breed.getName()))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping(value = "/dogs/{id}/image", produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity<byte[]> getDogImage(@PathVariable int id) {
+        try {
+            byte[] image = service.getDogImage(id);
+            return ResponseEntity.ok(image);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @GetMapping("/admin/cache/clear")
+    public ResponseEntity<Void> clearCache() {
+        service.clearImageCache();
+        return ResponseEntity.ok().build();
     }
 }

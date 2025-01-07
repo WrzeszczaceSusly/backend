@@ -1,36 +1,61 @@
 package org.example.schroniskodlapsow.service;
 
+import lombok.RequiredArgsConstructor;
 import org.example.schroniskodlapsow.dto.DogDto;
 import org.example.schroniskodlapsow.entity.breed.BreedEntity;
-import lombok.RequiredArgsConstructor;
+import org.example.schroniskodlapsow.entity.dog.DogEntity;
 import org.example.schroniskodlapsow.repository.breed.BreedRepository;
 import org.example.schroniskodlapsow.repository.dog.DogRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class DogService {
-    private final BreedRepository repository;
+
     private final DogRepository dogRepository;
+    private final BreedRepository breedRepository;
+    private final ImageCacheService imageCacheService;
+
+    public Optional<BreedEntity> getBreedDetails(int breedId) {
+        return breedRepository.findById(breedId);
+    }
 
     public Page<BreedEntity> getAllBreeds(Pageable pageable) {
-        return repository.findAll(pageable);
+        return breedRepository.findAll(pageable);
     }
-    public List<DogDto> getAllDogs(Pageable pageable) {
-        return dogRepository.findAll(pageable).getContent().stream()
-                .map(DogDto::from).toList();
-    }
+
     public List<BreedEntity> getAllBreeds() {
-        return repository.findAll();
-    }
-    public Optional<BreedEntity> getBreedDetails(int breedId) {
-        return repository.findById(breedId);
+        return breedRepository.findAll();
     }
 
+    public List<DogDto> getAllDogs(Pageable pageable) {
+        Page<DogEntity> dogsPage = dogRepository.findAll(pageable);
+        return dogsPage.getContent().stream()
+                .map(DogDto::from)
+                .collect(Collectors.toList());
+    }
+
+    public byte[] getDogImage(int dogId) throws IOException {
+        Optional<DogEntity> dog = dogRepository.findById(dogId);
+        if (dog.isEmpty()) {
+            throw new IllegalArgumentException("Dog not found with ID: " + dogId);
+        }
+
+        String breedName = dog.get().getBreed().getName().replace(" ", "");
+        String dogName = dog.get().getName();
+        String imagePath = "src/main/resources/static/" + breedName + "/" + dogName + ".png";
+
+        return imageCacheService.getImage(imagePath);
+    }
+
+    public void clearImageCache() {
+        imageCacheService.clearCache();
+    }
 }
-
