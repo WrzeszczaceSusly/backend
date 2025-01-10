@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -93,4 +94,11 @@ public class DogController {
         service.clearImageCache();
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/reservation")
+    public ResponseEntity<Boolean> reserveVisit(@RequestBody ReservationRequestDto reservationRequestDto) {
+        return ResponseEntity.ok(service.reserveIfAvailable(reservationRequestDto.dogId, reservationRequestDto.date));
+    }
+
+    public record ReservationRequestDto(int dogId, LocalDateTime date){};
 }
