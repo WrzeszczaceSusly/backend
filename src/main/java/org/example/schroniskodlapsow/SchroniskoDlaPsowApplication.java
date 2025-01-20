@@ -105,7 +105,10 @@ public class SchroniskoDlaPsowApplication {
         for (String dogName : dogNames) {
             // Budujemy ścieżkę do pliku z obrazem
             String breedString = breedName.replace(" ", "") + "/" + dogName + ".png";
-            Path imagePath = Path.of("src/main/resources/static/" + breedString);
+            // Path imagePath = Path.of("src/main/resources/static/" + breedString);
+            Path imagePath = Path.of("./resources/static/" + breedString);
+
+
             byte[] imageData = Files.readAllBytes(imagePath);
 
             // Tworzymy obiekt DogEntity z danymi właściwymi dla danego psa
